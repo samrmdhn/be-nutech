@@ -6,6 +6,7 @@ const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const app = express();
 const fs = require("fs");
+const streamifier = require("streamifier");
 const port = 3002;
 
 app.use(cors());
@@ -321,39 +322,42 @@ const createProduct = async (req, res) => {
         .status(400)
         .json({ message: "Product name is already exists" });
 
-    const tempFilePath = `temp_${Date.now()}`;
+    //    const tempFilePath = `temp_${Date.now()}`;
 
     // Write the file buffer to the temporary file
-    fs.writeFileSync(tempFilePath, file.buffer);
+    //  fs.writeFileSync(tempFilePath, file.buffer);
     //  const imgURL = await cloudinary.v2.uploader.upload(req.file.path);
-    const imgURL = await cloudinary.uploader.upload(tempFilePath, {
-      folder: "nutech", // Specify the folder name in your Cloudinary account
-    });
+    const stream = await cloudinary.uploader.upload_stream(
+      { folder: "nutech" },
+      async (error, result) => {
+        if (error) return console.log(error);
+        const product = await Product.create({
+          name,
+          description,
+          price_sell,
+          price_buy,
+          img: result.url,
+          stock,
+          categoryId,
+        });
+        //647f64edb94f22b273968d66
+        const category = await Category.findById({ _id: categoryId });
 
-    fs.unlinkSync(tempFilePath);
+        category.products.push(product._id);
 
-    const product = await Product.create({
-      name,
-      description,
-      price_sell,
-      price_buy,
-      img: imgURL.url,
-      stock,
-      categoryId,
-    });
-    //647f64edb94f22b273968d66
-    const category = await Category.findById({ _id: categoryId });
+        await product.save();
+        await category.save();
 
-    category.products.push(product._id);
+        res.status(201).json({
+          code: 201,
+          message: "Product successfully created",
+          data: product,
+        });
+      }
+    );
 
-    await product.save();
-    await category.save();
-
-    res.status(201).json({
-      code: 201,
-      message: "Product successfully created",
-      data: product,
-    });
+    //   fs.unlinkSync(tempFilePath);
+    streamifier.createReadStream(req.file.buffer).pipe(stream);
   } catch (error) {
     console.log(error);
     res
