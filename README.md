@@ -1,49 +1,70 @@
 API ENDPOINTS 
 
-app.post("/api/v1/register", register);
-
 // LOGIN
+
 Endpoint: /api/v1/login
+
 Method: POST
+
 Request Body:
-  email (String)
-  password (String)
+
+    email (String)
+    password (String)
+  
 Example: 
+
 {
+
     "email": "example@example.com",
     "password": "example123"
 }
+
 Response: 200 OK
 
+
 // REGISTER
+
 Endpoint: /api/v1/register
+
 Method: POST
+
 Request Body:
-  email (String)
-  password (String)
+
+    email (String)
+    password (String)
+  
 Example: 
+
 {
-    "email": "example@gmail.com",
+
+    "email": "example@example.com",
     "password": "example123"
 }
+
 Response: 200 OK
 
 // PRODUCTS 
 
 // CREATE
+
 Endpoint: /api/v1/products
+
 Method: POST
-Headers: Bearer + JWT TOKEN
+
 Request Body:
-  name (String)
-  description (String) 
-  price_sell (Number)
-  price_buy (Number)
-  stock (Number)
-  categoryId (String)
-  img (File)
+
+    name (String)
+    description (String) 
+    price_sell (Number)
+    price_buy (Number)
+    stock (Number)
+    categoryId (String)
+    img (File)
+  
 Example: 
+
 {
+
     "name" : "Haze",
     "description: "Clean",
     "price_sell": 1000,
@@ -51,8 +72,11 @@ Example:
     "stock" 5,
     "categoryId": "672329fasf2",
     "img": file
+    
 }
+
 Response: 201 OK
+
 
 // READ PRODUCT
 app.get("/api/v1/products", getProducts);
