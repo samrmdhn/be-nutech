@@ -1,47 +1,36 @@
-API ENDPOINTS 
+<h1>API ENDPOINTS</h1>
 
-// LOGIN
+<h5>Login</h5>
+<h5>Endpoint: /api/v1/login</h5>
+<h5>Method: POST</h5>
+<h5>Request Body: </h5>
+    
+    email (String)
+    password (String)
+    
+<h5> Example: </h5> 
 
-Endpoint: /api/v1/login
+    "email": "example@example.com",
+    "password": "example123"
 
-Method: POST
+<h5>Response: 200 OK</h5>
 
-Request Body:
+<br />
+
+<h5>REGISTER</h5>
+<h5>Endpoint: /api/v1/register</h5>
+<h5>Method: POST </h5>
+<h5>Request Body: </h5>
 
     email (String)
     password (String)
   
-Example: 
-
-{
+<h5> Example: </h5>
 
     "email": "example@example.com",
     "password": "example123"
-}
 
-Response: 200 OK
-
-
-// REGISTER
-
-Endpoint: /api/v1/register
-
-Method: POST
-
-Request Body:
-
-    email (String)
-    password (String)
-  
-Example: 
-
-{
-
-    "email": "example@example.com",
-    "password": "example123"
-}
-
-Response: 200 OK
+<h5>Response: 200 OK</h5>
 
 // PRODUCTS 
 
@@ -99,5 +88,5 @@ app.post("/api/v1/category", createCategory);
 // READ CATEGORY
 app.get("/api/v1/category", getCategory);
 
-// DELETE CATEGORY
+// DELETE CATEGORy
 app.put("/api/v1/category/:id", updateCategory);
