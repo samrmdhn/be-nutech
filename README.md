@@ -32,15 +32,16 @@
 
 <h5>Response: 200 OK</h5>
 
-// PRODUCTS 
+<br />
 
-// CREATE
+<h5>Products</h5>
 
-Endpoint: /api/v1/products
+<br />
 
-Method: POST
-
-Request Body:
+<h5>Create</h5>
+<h5>Endpoint: /api/v1/products</h5>
+<h5>Method: POST</h5>
+<h5>Request Body:</h5>
 
     name (String)
     description (String) 
@@ -50,9 +51,7 @@ Request Body:
     categoryId (String)
     img (File)
   
-Example: 
-
-{
+<h5>Example:</h5>
 
     "name" : "Haze",
     "description: "Clean",
@@ -61,10 +60,11 @@ Example:
     "stock" 5,
     "categoryId": "672329fasf2",
     "img": file
-    
-}
+   
+<h5>Response: 201 OK</h5>
 
-Response: 201 OK
+
+<br />
 
 
 // READ PRODUCT
