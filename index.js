@@ -1,4 +1,5 @@
-const express = require("express");const cors = require("cors");
+const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -283,6 +284,13 @@ const getProducts = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  await db();
+
+  try {
+  } catch (error) {}
+};
+
 const getProductsById = async (req, res) => {
   const { id } = req.params;
   await db();
@@ -385,11 +393,6 @@ const updateProducts = async (req, res) => {
 
   try {
     const sameProductName = await Product.findOne({ name: name });
-
-    if (sameProductName)
-      return res
-        .status(400)
-        .json({ message: "Product name is already exists" });
 
     let imgFix = "";
 
@@ -523,18 +526,16 @@ app.get("/", (req, res) => {
       database: "MongoDB Atlas",
     },
     depedencies: {
-      dependencies: {
-        bcrypt: "^5.1.0",
-        cloudinary: "^1.37.0",
-        cors: "^2.8.5",
-        express: "^4.18.2",
-        jsonwebtoken: "^9.0.0",
-        mongodb: "^5.6.0",
-        mongoose: "^7.2.2",
-        multer: "^1.4.5-lts.1",
-        "node-fetch": "^3.3.1",
-        nodemon: "^2.0.22",
-      },
+      bcrypt: "^5.1.0",
+      cloudinary: "^1.37.0",
+      cors: "^2.8.5",
+      express: "^4.18.2",
+      jsonwebtoken: "^9.0.0",
+      mongodb: "^5.6.0",
+      mongoose: "^7.2.2",
+      multer: "^1.4.5-lts.1",
+      "node-fetch": "^3.3.1",
+      nodemon: "^2.0.22",
     },
   });
 });
@@ -565,12 +566,12 @@ app.put(
 app.delete("/api/v1/products/:id", verifyUser, deleteProducts);
 
 // CREATE CATEGORY
-app.post("/api/v1/category", createCategory);
+app.post("/api/v1/category", verifyUser, createCategory);
 
 // READ CATEGORY
 app.get("/api/v1/category", getCategory);
 
 // DELETE CATEGORY
-app.put("/api/v1/category/:id", updateCategory);
+app.put("/api/v1/category/:id", verifyUser, updateCategory);
 
 module.exports = app;
