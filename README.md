@@ -1,7 +1,7 @@
 <h1>CRUD PRODUCTS (ADMIN)</h1>
 <h5>https://fe-nutech-samrmdhn.vercel.app/dashboard/login</h5>
-<h5>admin@admin.com</h5>
-<h5>admin</h5>
+<h5>Email: admin@admin.com</h5>
+<h5>Password: admin</h5>
 
 <h1>API ENDPOINTS</h1>
 
